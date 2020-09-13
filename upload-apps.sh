@@ -27,16 +27,21 @@ then
 else
     touch "$lock_file"
     lftp -p "$port" -u "$login","$pass" ftp://"$host" << EOF
+    set dns:fatal-timeout never
     set ssl:verify-certificate no
     set ssl:priority +TLS1.2
+    set net:reconnect-interval-base 5
+    set ftp:list-options -a
+    set sftp:auto-confirm yes
     set ftp:use-feat false
     set ftp:ssl-allow true
     set ftp:ssl-auth TLS
     set ftp:ssl-protect-data true
     set ftp:ssl-protect-list true
-    set ftp:list-options -a
     set mirror:exclude-regex ^.*file_id\.jpg.*$\|^.*\.jpeg.*$\|^.*\[.*$
     set mirror:order "*.sfv *.nfo Sample/"
+    set net:socket-buffer 0
+	set net:limit-total-rate $limit
     mirror -R -c -v --Remove-source-dirs "$remote_dir" "$local_dir"
 EOF
 
