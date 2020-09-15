@@ -5,7 +5,7 @@ Red='\033[0;31m'
 Green='\033[0;32m'
 Cyan='\033[0;36m'
 
-# Script forked from vicelversa.
+# Script forked from vicelversa https://github.com/vicelversa/AutomatedSeedboxSync
 
 # Script variables, please plug-in your configuration here:
 login='reuss'
